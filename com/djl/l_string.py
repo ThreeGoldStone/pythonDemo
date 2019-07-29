@@ -171,4 +171,40 @@ isalpha() 是否是字母
 isdecimal 是否只包含十进制数
 isdigit 是否全是数字（0~9）
 isidentifier 是不是以字母和下划线开头，
+...
 '''
+
+'''
+字符串格式化
+format 函数格式字符串语法---python鼓励使用
+
+"{}{xxx}".format(*args,**kwargs) -> str
+args 是位置参数，是一个元组
+kwargs是关键字参数，是一个字典
+花括号标识占位符
+{}表示按照顺序匹配参数，{n}表示区位置参数索引为n的值
+{xxx}表示在关键字参数中搜索名称一致的
+{{}}表示打印花括号
+'''
+print('{}.{}.{}'.format('a', 'b', 'c'))  # 默认顺序
+print('{1}.{0}.{1}'.format('a', 'b', 'c'))  # 关键字或index
+print('{1}.{0}.{1}'.format('a', 'b', 'c', server='xxx'))  # 关键字或index
+print('{server}.{0}.{1}'.format('a', 'b', 'c', server='xxx'))  # 关键字或index
+print('{0[0]}.{0[1]}.{1}'.format(('aa', 'bb'), 'cc'))  # 访问元素
+
+from collections import namedtuple
+
+point = namedtuple('Point', 'x y')
+x = point(4, 5)
+print('{0.x}.{0.y}.{1}'.format(x, 'cc'))  # 对象属相访问
+
+print('{0}*{1}={2:3}'.format(3, 4, 3 * 4))  # :3右对齐，3个不足补空格
+print('{0}*{1}={2:<3}'.format(3, 4, 3 * 4))  # :<3左对齐，3个不足补空格
+print('{0}*{1}={2:<03}'.format(3, 4, 3 * 4))  # :<3左对齐，3个不足补0
+print('{0}*{1}={2:03}'.format(3, 4, 3 * 4))  # :<3右对齐，3个不足补0
+print('{:^30}'.format('centered'))  # 居中补齐
+print('{:x^30}'.format('centered'))  # 居中补齐
+print('int:{0:d}; hex:{0:x}; oct:{0:o}; bin:{0:b}'.format(55))  # 进制
+print('int:{0:d}; hex:{0:#x}; oct:{0:#o}; bin:{0:#b}'.format(55))  # 进制
+octes = [192, 168, 0, 1]
+print('{:02X}.{:02X}.{:02X}.{:02X}'.format(*octes))  # :02表示2位对齐不够补0，X表示16进制， * 参数解构
